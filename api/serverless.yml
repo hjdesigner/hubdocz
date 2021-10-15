@@ -33,6 +33,13 @@ functions:
       - http:
           method: PUT
           path: /category/{id}
+  getCategories:
+    handler: src/routes/category/getCategories.handler
+    events:
+    - http:
+        method: GET
+        path: /categories
+
 custom:
   CategoryTable:
     name: !Ref CategoryTable

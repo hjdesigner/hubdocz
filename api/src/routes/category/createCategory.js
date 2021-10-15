@@ -22,7 +22,6 @@ async function createCategory(event, context) {
       Item: category,
     }).promise();
   } catch(error) {
-    console.error(error);
     throw new createError.InternalServerError(error);
   }
 

@@ -30,11 +30,8 @@ async function updateCategory(event, context) {
 
   try {
     const result = await dynamodb.update(params).promise();
-    console.log(result);
-    console.log(params);
     update = result.Attributes;
   } catch(error) {
-    console.error(error);
     throw new createError.InternalServerError(error);
   }
 
