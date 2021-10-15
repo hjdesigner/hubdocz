@@ -1,0 +1,41 @@
+service:
+  name: api
+
+plugins:
+  - serverless-bundle
+  - serverless-pseudo-parameters
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  memorySize: 256
+  region: us-east-1
+  stage: ${opt:stage, 'dev'}
+  environment:
+    CATEGORY_TABLE_NAME: ${self:custom.CategoryTable.name}
+  iamRoleStatements:
+    - ${file(iam/CategoryTableIAM.yml):CategoryTableIAM}
+
+resources:
+  Resources:
+    CategoryTable: ${file(resources/CategoryTable.yml):CategoryTable}
+  
+functions:
+  createCategory:
+    handler: src/routes/category/createCategory.handler
+    events:
+      - http:
+          method: POST
+          path: /category
+  updateCategory:
+    handler: src/routes/category/updateCategory.handler
+    events:
+      - http:
+          method: PUT
+          path: /category/{id}
+custom:
+  CategoryTable:
+    name: !Ref CategoryTable
+    arn: !GetAtt CategoryTable.Arn
+  bundle:
+    linting: false
