@@ -36,9 +36,15 @@ functions:
   getCategories:
     handler: src/routes/category/getCategories.handler
     events:
-    - http:
-        method: GET
-        path: /categories
+      - http:
+          method: GET
+          path: /categories
+  deleteCategory:
+    handler: src/routes/category/deleteCategoy.handler
+    events:
+      - http:
+          method: DELETE
+          path: /category/{id}
 
 custom:
   CategoryTable:
