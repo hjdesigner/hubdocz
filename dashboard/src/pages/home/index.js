@@ -5,8 +5,8 @@ const HomeTemplate = () => {
   return (
     <Wrapper>
       <Name>HubDocz</Name>
-      <Text>Crie os melhores conteúdos para sua FAQ</Text>
-      <OppenSource>Essa é uma ferramenta open source, então sinta-se a vontade para contribuir</OppenSource>
+      <Text>Create the best content for your FAQ</Text>
+      <OppenSource>This is an open source tool, so feel free to contribute</OppenSource>
     </Wrapper>
   )
 }

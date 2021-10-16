@@ -2,10 +2,13 @@ import React, { Suspense } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import styled from 'styled-components'
 import { Nav } from 'components'
-import { HOME } from 'utils/routes'
+import { HOME, CONTENTS } from 'utils/routes'
 
 const HomeTemplate = React.lazy(
   () => import('pages/home')
+);
+const ContentsTemplate = React.lazy(
+  () => import('pages/contents')
 );
 
 const Main = () => (
@@ -20,6 +23,11 @@ const Main = () => (
             path={HOME}
             exact
             component={HomeTemplate}
+          />
+          <Route
+            path={CONTENTS}
+            exact
+            component={ContentsTemplate}
           />
         </Switch>
       </WrapperRight>      
