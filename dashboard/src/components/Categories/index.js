@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Edit, Trash } from 'utils/icons'
 import * as S from './styles'
 
-const Categories = ({ item }) => {
+const Categories = ({ item, handlerDelete }) => {
   return (
     <S.Category>
       <S.CategoryText>
@@ -11,7 +11,7 @@ const Categories = ({ item }) => {
       </S.CategoryText>      
       <S.CategoryActions>
         <S.CategoryButton><Edit /></S.CategoryButton>
-        <S.CategoryButton space={true}><Trash /></S.CategoryButton>
+        <S.CategoryButton space={true} onClick={handlerDelete}><Trash /></S.CategoryButton>
       </S.CategoryActions>
     </S.Category>
   )
@@ -19,6 +19,7 @@ const Categories = ({ item }) => {
 
 Categories.propTypes = {
   item: PropTypes.object,
+  handlerDelete: PropTypes.func,
 }
 
 export default Categories;

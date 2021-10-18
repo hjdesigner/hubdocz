@@ -1,5 +1,5 @@
 import React, { useState, createContext } from 'react'
-import { getAllCategories, createCategory } from 'utils/request'
+import { getAllCategories, createCategory, deleteCategory } from 'utils/request'
 
 const CategoryContext = createContext();
 
@@ -9,6 +9,8 @@ function CategoryProvider({ children }) {
   const [nameCategory, setNameCategory] = useState('');
   const [successCategory, setSuccessCategory] = useState(false);
   const [errorCategory, setErrorCategory] = useState(false);
+  const [successDeleteCategory, setSuccessDeleteCategory] = useState(false);
+  const [errorDeleteCategory, setErrorDeleteCategory] = useState(false);
   const [showCategory, setShowCategory] = useState(true);
 
   const getCategories = async () => {
@@ -25,6 +27,8 @@ function CategoryProvider({ children }) {
   const handleAddCategory = async () => {
     setErrorCategory(false);
     setSuccessCategory(false);
+    setSuccessDeleteCategory(false);
+    setErrorDeleteCategory(false);
 
     const result = await createCategory({
       name: nameCategory,
@@ -46,6 +50,25 @@ function CategoryProvider({ children }) {
     setErrorCategory(true);
   }
 
+  const handlerDelete = async (id) => {
+    setErrorCategory(false);
+    setSuccessCategory(false);
+    setSuccessDeleteCategory(false);
+    setErrorDeleteCategory(false);
+
+    const result = await deleteCategory(id);
+
+    if (result) {
+      setSuccessDeleteCategory(true);
+      setErrorDeleteCategory(false);
+
+      const allCategories = await getAllCategories();
+      setCategories(allCategories)
+
+      return;
+    }
+    setErrorDeleteCategory(true);
+  }
  
   return (
     <CategoryContext.Provider value={{
@@ -55,6 +78,8 @@ function CategoryProvider({ children }) {
       successCategory,
       errorCategory,
       showCategory,
+      successDeleteCategory,
+      errorDeleteCategory,
       getCategories,
       handleToggleAddCategory,
       setToggleAddCategory,
@@ -63,6 +88,9 @@ function CategoryProvider({ children }) {
       setShowCategory,
       setErrorCategory,
       setSuccessCategory,
+      handlerDelete,
+      setSuccessDeleteCategory,
+      setErrorDeleteCategory,
     }}>
       {children}
     </CategoryContext.Provider>

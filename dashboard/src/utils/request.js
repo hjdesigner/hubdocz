@@ -16,3 +16,11 @@ export const createCategory = async (data) => {
     return false;
   }
 }
+export const deleteCategory = async (id) => {
+  try {
+    const response = await axios.delete(`${process.env.REACT_APP_API}/category/${id}`);
+    return response.data;
+  } catch {
+    return false;
+  }
+}

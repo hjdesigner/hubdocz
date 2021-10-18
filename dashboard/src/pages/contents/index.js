@@ -23,11 +23,16 @@ const ContentsTemplate = () => {
     successCategory,
     errorCategory,
     showCategory,
+    successDeleteCategory,
+    errorDeleteCategory,
     handleAddCategory,
     setNameCategory,
     setShowCategory,
     setErrorCategory,
     setSuccessCategory,
+    handlerDelete,
+    setSuccessDeleteCategory,
+    setErrorDeleteCategory,
   } = useCategory();
   
 
@@ -42,9 +47,15 @@ const ContentsTemplate = () => {
         <S.ActionCategory>
           <ButtonDefault handleClick={() => handleToggleAddCategory()} >Add Category</ButtonDefault>
         </S.ActionCategory>
-        {(successCategory || errorCategory) && <S.StatusActions>
+        {(successCategory ||
+          errorCategory ||
+          successDeleteCategory ||
+          errorDeleteCategory
+        ) && <S.StatusActions>
           {successCategory && <AlertSuccess text='Category created successfully' handleClose={() => setSuccessCategory()} />}
+          {successDeleteCategory && <AlertSuccess text='Category deleted successfully' handleClose={() => setSuccessDeleteCategory()} />}
           {errorCategory && <AlertError text='Error creating category' handleClose={() => setErrorCategory()} />}
+          {errorDeleteCategory && <AlertError text='Error deleting category' handleClose={() => setErrorDeleteCategory()} />}
         </S.StatusActions>}
         {toggleAddCategory && !successCategory && <S.AddCategory>
           <Input name='addCategory' label='Enter the category name' placeholder='Category name' value={nameCategory} handleChange={(e) => setNameCategory(e.target.value)} />
@@ -58,7 +69,7 @@ const ContentsTemplate = () => {
             <ButtonCancel handleClick={() => setToggleAddCategory(false)} space={true}>Cancel</ButtonCancel>
           </S.AcitionsAddCategory>
         </S.AddCategory>}
-        {categories.map((item) => ( <Categories key={item.id} item={item} /> ))}
+        {categories.map((item) => ( <Categories key={item.id} item={item} handlerDelete={() => handlerDelete(item.id)} /> ))}
       </S.WrapperCategories>
     </S.Wrapper>
   )
