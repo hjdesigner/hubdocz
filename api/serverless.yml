@@ -27,24 +27,28 @@ functions:
       - http:
           method: POST
           path: /category
+          cors: true
   updateCategory:
     handler: src/routes/category/updateCategory.handler
     events:
       - http:
           method: PUT
           path: /category/{id}
+          cors: true
   getCategories:
     handler: src/routes/category/getCategories.handler
     events:
       - http:
           method: GET
           path: /categories
+          cors: true
   deleteCategory:
     handler: src/routes/category/deleteCategoy.handler
     events:
       - http:
           method: DELETE
           path: /category/{id}
+          cors: true
 
 custom:
   CategoryTable:

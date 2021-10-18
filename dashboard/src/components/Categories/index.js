@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import { Edit, Trash } from 'utils/icons'
 import * as S from './styles'
 
@@ -14,6 +15,10 @@ const Categories = ({ item }) => {
       </S.CategoryActions>
     </S.Category>
   )
+}
+
+Categories.propTypes = {
+  item: PropTypes.object,
 }
 
 export default Categories;

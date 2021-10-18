@@ -23,6 +23,6 @@ export const CategoryActions = styled(CategoryText)``;
 export const CategoryButton = styled.button`
   background-color: transparent;
   border: 0;
-  margin: 0 ${props => props.space === true ? props.theme.spaces.small : '0'};
+  margin-left: ${props => props.space === true ? props.theme.spaces.small : '0'};
   cursor: pointer;
 `;
