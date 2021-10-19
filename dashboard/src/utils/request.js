@@ -24,3 +24,11 @@ export const deleteCategory = async (id) => {
     return false;
   }
 }
+export const editCategory = async (id, data) => {
+  try {
+    const response = await axios.put(`${process.env.REACT_APP_API}/category/${id}`, data);
+    return response.data;
+  } catch {
+    return false;
+  }
+}

@@ -16,7 +16,6 @@ const Select = ({ label, name, children, value, handleChange }) => {
 Select.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string,
-  value: PropTypes.bool,
   children: PropTypes.node,
   handleChange: PropTypes.func,
 }
