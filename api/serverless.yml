@@ -59,7 +59,14 @@ functions:
           method: POST
           path: /subcategory
           cors: true
-
+  updateSubCategory:
+    handler: src/routes/subCategory/updateSubCategory.handler
+    events:
+      - http:
+          method: PUT
+          path: /subcategory/{id}
+          cors: true
+          
 custom:
   CategoryTable:
     name: !Ref CategoryTable
