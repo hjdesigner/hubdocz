@@ -9,4 +9,3 @@ CategoryTable:
     KeySchema:
       - AttributeName: id
         KeyType: HASH
-            

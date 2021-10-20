@@ -13,12 +13,15 @@ provider:
   stage: ${opt:stage, 'dev'}
   environment:
     CATEGORY_TABLE_NAME: ${self:custom.CategoryTable.name}
+    SUB_CATEGORY_TABLE_NAME: ${self:custom.SubCategoryTable.name}
   iamRoleStatements:
     - ${file(iam/CategoryTableIAM.yml):CategoryTableIAM}
+    - ${file(iam/SubCategoryTableIAM.yml):SubCategoryTableIAM}
 
 resources:
   Resources:
     CategoryTable: ${file(resources/CategoryTable.yml):CategoryTable}
+    SubCategoryTable: ${file(resources/SubCategoryTable.yml):SubCategoryTable}
   
 functions:
   createCategory:
@@ -49,10 +52,20 @@ functions:
           method: DELETE
           path: /category/{id}
           cors: true
+  createSubCategory:
+    handler: src/routes/subCategory/createSubCategory.handler
+    events:
+      - http:
+          method: POST
+          path: /subcategory
+          cors: true
 
 custom:
   CategoryTable:
     name: !Ref CategoryTable
     arn: !GetAtt CategoryTable.Arn
+  SubCategoryTable:
+    name: !Ref SubCategoryTable
+    arn: !GetAtt SubCategoryTable.Arn
   bundle:
     linting: false
