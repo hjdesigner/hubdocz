@@ -12,7 +12,7 @@ SubCategoryTable:
       - AttributeName: id
         KeyType: HASH
     GlobalSecondaryIndexes:
-      - IndexName: idCategory
+      - IndexName: category
         KeySchema:
           - AttributeName: idCategory
             KeyType: HASH

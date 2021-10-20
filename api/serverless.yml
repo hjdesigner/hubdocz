@@ -66,8 +66,16 @@ functions:
           method: PUT
           path: /subcategory/{id}
           cors: true
+  getSubCategories:
+    handler: src/routes/subCategory/getSubCategories.handler
+    events:
+      - http:
+          method: GET
+          path: /subcategory
+          cors: true
           
 custom:
+  authorizer: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:auth-service-${self:provider.stage}-auth
   CategoryTable:
     name: !Ref CategoryTable
     arn: !GetAtt CategoryTable.Arn

@@ -9,3 +9,4 @@ SubCategoryTableIAM:
     - dynamodb:DeleteItem
   Resource:
     - ${self:custom.SubCategoryTable.arn}
+    - !Join ['/', [ '${self:custom.SubCategoryTable.arn}', 'index', '*' ]]
