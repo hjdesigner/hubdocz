@@ -73,6 +73,13 @@ functions:
           method: GET
           path: /subcategory
           cors: true
+  deleteSubCategory:
+    handler: src/routes/subCategory/deleteSubCategory.handler
+    events:
+      - http:
+          method: DELETE
+          path: /subcategory/{id}
+          cors: true
           
 custom:
   authorizer: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:auth-service-${self:provider.stage}-auth
