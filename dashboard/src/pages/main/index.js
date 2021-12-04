@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import styled from 'styled-components'
 import { Nav } from 'components'
-import { HOME, CONTENTS } from 'utils/routes'
+import { HOME, CONTENTS, ADD_CATEGORY } from 'utils/routes'
 
 const HomeTemplate = React.lazy(
   () => import('pages/home')
@@ -10,6 +10,9 @@ const HomeTemplate = React.lazy(
 const ContentsTemplate = React.lazy(
   () => import('pages/contents')
 );
+const AddCategoryTemplate = React.lazy(
+  () => import('pages/addCategory')
+)
 
 const Main = () => (
   <>
@@ -29,6 +32,11 @@ const Main = () => (
             exact
             component={ContentsTemplate}
           />
+          <Route
+            path={ADD_CATEGORY}
+            exact
+            component={AddCategoryTemplate}
+          />
         </Switch>
       </WrapperRight>      
     </Suspense>
@@ -44,7 +52,7 @@ const WrapperRight = styled.div`
   width: 90%;
   height: 100%;
   display: flex;
-  margin-left: 5%;
+  margin-left: 3%;
 `;
 
 export default Main;

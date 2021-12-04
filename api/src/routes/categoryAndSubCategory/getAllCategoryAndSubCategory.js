@@ -23,6 +23,7 @@ async function getAllCategoryAndSubCategory(event, context) {
       categories.push({
         id: item.id,
         name: item.name,
+        status: item.status,
         subCategory: result
       })
     });

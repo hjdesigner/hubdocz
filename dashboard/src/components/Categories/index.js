@@ -1,18 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types';
-import { Edit, Trash } from 'utils/icons'
+import { Arrow } from 'utils/icons'
 import * as S from './styles'
 
-const Categories = ({ item, handlerDelete, handlerEdit }) => {
+const Categories = ({ item }) => {
+  const [open, setOpen] = useState(false);
   return (
     <S.Category>
-      <S.CategoryText>
-        <S.CategoryStatus status={item.status} />{item.name}
-      </S.CategoryText>      
-      <S.CategoryActions>
-        <S.CategoryButton onClick={handlerEdit}><Edit /></S.CategoryButton>
-        <S.CategoryButton space={true} onClick={handlerDelete}><Trash /></S.CategoryButton>
-      </S.CategoryActions>
+      <S.CategoryText onClick={() => setOpen(!open)}>
+       {item.subCategory.length > 0 && <S.IconCategory open={open}><Arrow /></S.IconCategory>}
+       <S.CategoryStatus status={item.status} space={item.subCategory.length > 0 ? true : false} />{item.name}
+      </S.CategoryText>            
+      <S.SubCategory open={open}>
+        {item.subCategory.map((sub) => (        
+          <S.SubCategoryLi key={sub.id}>{sub.name}</S.SubCategoryLi>
+        ))}      
+      </S.SubCategory>
     </S.Category>
   )
 }
