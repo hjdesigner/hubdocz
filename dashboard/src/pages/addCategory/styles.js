@@ -79,3 +79,6 @@ export const IsSubCheck = styled.input`
     background-color: ${props => props.theme.colors.blue};
   }
 `;
+export const AlertWrapper = styled.div`
+  margin-bottom: ${props => props.theme.spaces.medium};
+`;

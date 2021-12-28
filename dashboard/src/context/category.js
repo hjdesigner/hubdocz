@@ -17,6 +17,8 @@ function CategoryProvider({ children }) {
   const [idSub, setIdSub] = useState('');
   const [statusCategory, setStatusCategory] = useState('true');
   const [isSub, setIsSub] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
   
   const getCategories = async () => {
     const result = await getAllCategoriesAndSub();
@@ -44,16 +46,22 @@ function CategoryProvider({ children }) {
 
       if (result) {
         resetData();
+        setSuccess(true);
         return;
       }
+
+      setError(true);
     }
 
     const result = await createCategory(data);
 
     if (result) {
       resetData();
+      setSuccess(true);
       return;
     }
+
+    setError(true);
   }
 
   
@@ -94,6 +102,10 @@ function CategoryProvider({ children }) {
       idSub,
       setIdSub,
       saveCategory,
+      success,
+      setSuccess,
+      error,
+      setError,
     }}>
       {children}
     </CategoryContext.Provider>

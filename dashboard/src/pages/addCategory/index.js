@@ -5,6 +5,8 @@ import {
   Select,
   Input,
   ButtonCreate,
+  AlertSuccess,
+  AlertError,
 } from 'components'
 import * as S from './styles'
 
@@ -23,6 +25,10 @@ const AddCategoryTemplate = () => {
     setStatusCategory,
     idSub,
     setIdSub,
+    success,
+    setSuccess,
+    error,
+    setError,
   } = useCategory();
 
   useEffect(() => {
@@ -44,6 +50,12 @@ const AddCategoryTemplate = () => {
       </S.WrapperCategories>
       <S.Page>
         <S.Form>
+          {success && (<S.AlertWrapper>
+            <AlertSuccess handleClose={() => setSuccess(false)} text='Category successfully registered!' />
+          </S.AlertWrapper>)}
+          {error && (<S.AlertWrapper>
+            <AlertSuccess handleClose={() => setError(false)} text='There was an error when registering the category, try again.' />
+          </S.AlertWrapper>)}
           <S.TitleCategory>Create your category</S.TitleCategory>
           <Input name='addCategory' label='Enter the category name' placeholder='Category name' value={nameCategory} handleChange={(e) => setNameCategory(e.target.value)} />
           <S.SpaceMedium />
