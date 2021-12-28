@@ -6,6 +6,7 @@ import {
   deleteCategory,
   editCategory,
   getAllCategoriesAndSub,
+  getCategoryId,
 } from 'utils/request'
 
 const CategoryContext = createContext();
@@ -19,6 +20,7 @@ function CategoryProvider({ children }) {
   const [isSub, setIsSub] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [currentCategory, setCurrentCategory] = useState({});
   
   const getCategories = async () => {
     const result = await getAllCategoriesAndSub();
@@ -46,6 +48,7 @@ function CategoryProvider({ children }) {
 
       if (result) {
         resetData();
+        getCategories();
         setSuccess(true);
         return;
       }
@@ -57,6 +60,23 @@ function CategoryProvider({ children }) {
 
     if (result) {
       resetData();
+      getCategories();
+      setSuccess(true);
+      return;
+    }
+
+    setError(true);
+  }
+  const handlerEdit = async (id) => {
+    let data = {
+      id,
+      name: nameCategory,
+      status: statusCategory === 'true' ? true : false,
+    }
+    const result = await editCategory(id, data);
+
+    if (result) {
+      getCategories();
       setSuccess(true);
       return;
     }
@@ -64,6 +84,15 @@ function CategoryProvider({ children }) {
     setError(true);
   }
 
+  const getCurrentCategory = async (id) => {
+    const result = await getCategoryId(id);
+    setCurrentCategory(result);
+  }
+  const editCurrentCategory = async (id) => {
+    const result = await getCategoryId(id);
+    setNameCategory(result.name);
+    setStatusCategory(result.status ? "true" : "false");
+  }
   
   // const handlerDelete = async (id) => {
   //   setErrorCategory(false);
@@ -106,6 +135,10 @@ function CategoryProvider({ children }) {
       setSuccess,
       error,
       setError,
+      getCurrentCategory,
+      currentCategory,
+      editCurrentCategory,
+      handlerEdit,
     }}>
       {children}
     </CategoryContext.Provider>

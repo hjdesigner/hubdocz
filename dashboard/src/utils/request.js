@@ -8,6 +8,14 @@ export const getAllCategories = async () => {
     return false;
   }
 }
+export const getCategoryId = async (id) => {
+  try {
+    const response = await axios.get(`${process.env.REACT_APP_API}/category/${id}`);
+    return response.data;
+  } catch {
+    return false;
+  }
+}
 export const createCategory = async (data) => {
   try {
     const response = await axios.post(`${process.env.REACT_APP_API}/category`, data);

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from "react-router-dom";
 
 export const Category = styled.li`
   align-items: center;
@@ -47,4 +48,17 @@ export const IconCategory = styled.div`
     width: 18px;
     height: 18px;
   }
+`;
+export const CategoryLink = styled(Link)`
+  list-style: none;
+  text-decoration: none;
+  width: auto;
+  display: flex;
+  align-items: center;
+  padding: ${props => props.theme.spaces.small} 0;
+  font-size: 1.3rem;
+  color: ${props => props.theme.colors.grayMedium};
+  justify-content: space-between;
+  flex-wrap: wrap;
+  cursor: pointer;
 `;

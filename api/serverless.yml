@@ -45,6 +45,13 @@ functions:
           method: GET
           path: /categories
           cors: true
+  getCategory:
+    handler: src/routes/category/getCategory.handler
+    events:
+      - http:
+          method: GET
+          path: /category/{id}
+          cors: true
   deleteCategory:
     handler: src/routes/category/deleteCategoy.handler
     events:

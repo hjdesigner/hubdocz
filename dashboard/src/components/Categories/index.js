@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types';
 import { Arrow } from 'utils/icons'
+import { friendlyUrl } from 'utils/utils';
 import * as S from './styles'
 
 const Categories = ({ item }) => {
@@ -8,8 +9,10 @@ const Categories = ({ item }) => {
   return (
     <S.Category>
       <S.CategoryText onClick={() => setOpen(!open)}>
-       {item.subCategory.length > 0 && <S.IconCategory open={open}><Arrow /></S.IconCategory>}
-       <S.CategoryStatus status={item.status} space={item.subCategory.length > 0 ? true : false} />{item.name}
+       <S.CategoryLink to={`/contents/category/${friendlyUrl(item.id)}`}>
+        {item.subCategory.length > 0 && <S.IconCategory open={open}><Arrow /></S.IconCategory>}
+        <S.CategoryStatus status={item.status} space={item.subCategory.length > 0 ? true : false} />{item.name}
+      </S.CategoryLink>
       </S.CategoryText>            
       <S.SubCategory open={open}>
         {item.subCategory.map((sub) => (        

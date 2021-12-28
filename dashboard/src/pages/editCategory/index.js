@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useCategory } from 'hooks'
+import { useParams } from 'react-router-dom';
 import {
   Categories,
   Select,
@@ -10,28 +11,27 @@ import {
 } from 'components'
 import * as S from './styles'
 
-const AddCategoryTemplate = () => {
+const EditCategoryTemplate = () => {
+  let { id } = useParams();
   const {
     getCategories,
     categories,
     nameCategory,
     setNameCategory,
-    saveCategory,
+    handlerEdit,
     getCategory,
     category,
-    isSub,
-    setIsSub,
     statusCategory,
     setStatusCategory,
-    idSub,
-    setIdSub,
     success,
     setSuccess,
     error,
     setError,
+    editCurrentCategory,
   } = useCategory();
 
   useEffect(() => {
+    editCurrentCategory(id);
     getCategories();
     getCategory();
   }, []);
@@ -51,12 +51,12 @@ const AddCategoryTemplate = () => {
       <S.Page>
         <S.Form>
           {success && (<S.AlertWrapper>
-            <AlertSuccess handleClose={() => setSuccess(false)} text='Category successfully registered!' />
+            <AlertSuccess handleClose={() => setSuccess(false)} text='Successfully edited category!' />
           </S.AlertWrapper>)}
           {error && (<S.AlertWrapper>
-            <AlertError handleClose={() => setError(false)} text='There was an error when registering the category, try again.' />
+            <AlertError handleClose={() => setError(false)} text='There was an error when editing the category, try again.' />
           </S.AlertWrapper>)}
-          <S.TitleCategory>Create your category</S.TitleCategory>
+          <S.TitleCategory>Edit the category</S.TitleCategory>
           <Input name='addCategory' label='Enter the category name' placeholder='Category name' value={nameCategory} handleChange={(e) => setNameCategory(e.target.value)} />
           <S.SpaceMedium />
           <Select name='StatusCategory' label='Show category' value={statusCategory} handleChange={(e) => setStatusCategory(e.target.value)}>
@@ -64,22 +64,12 @@ const AddCategoryTemplate = () => {
             <option value="false">disabled</option>
           </Select>
           <S.SpaceMedium />
-          <S.IsSub>
-            <S.IsSubText>Is a subcategory?</S.IsSubText>
-            <S.IsSubCheck type="checkbox" id="sub" value={isSub} onClick={() => setIsSub(!isSub)} />
-            <S.IsSubLabel htmlFor="sub" />
-          </S.IsSub>
-          <S.SpaceMedium />
-          {isSub && <Select name='category' label='Choose the category' value={idSub} handleChange={(e) => setIdSub(e.target.value)}>
-            <option value="">categories</option>
-            {category.map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}
-          </Select>}
           <S.AcitionsAddCategory>
             <ButtonCreate
               disabled={nameCategory === ''}
-              handleClick={() => saveCategory()}
+              handleClick={() => handlerEdit(id)}
               >
-                Create
+                Edit
             </ButtonCreate>
           </S.AcitionsAddCategory>
         </S.Form>
@@ -88,4 +78,4 @@ const AddCategoryTemplate = () => {
   </>)
 }
 
-export default AddCategoryTemplate
+export default EditCategoryTemplate
