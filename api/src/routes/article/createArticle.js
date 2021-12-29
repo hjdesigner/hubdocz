@@ -8,7 +8,7 @@ import createArticleSchema from '../../lib/schemas/createArticleSchema'
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 async function createArticle(event, context) {
-  const { name, status, idCategory, text } = event.body
+  const { name, status, idCategory, text, slug } = event.body
   const now = new Date()
   
   const article = {
@@ -17,6 +17,7 @@ async function createArticle(event, context) {
     status,
     idCategory,
     text,
+    slug,
     createAt: now.toISOString(),
   }
 

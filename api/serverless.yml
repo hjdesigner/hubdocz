@@ -118,6 +118,20 @@ functions:
           method: GET
           path: /articles
           cors: true
+  getArticle:
+    handler: src/routes/article/getArticle.handler
+    events:
+      - http:
+          method: GET
+          path: /article/{id}
+          cors: true
+  getSlugArticle:
+    handler: src/routes/article/getSlugArticle.handler
+    events:
+      - http:
+          method: GET
+          path: /slugarticle
+          cors: true
           
 custom:
   authorizer: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:auth-service-${self:provider.stage}-auth

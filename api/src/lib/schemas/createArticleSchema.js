@@ -15,7 +15,7 @@ const schema = {
         status: {
           type: 'boolean',
         },
-        slog: {
+        slug: {
           type: 'string'
         },
         text: {
@@ -23,7 +23,7 @@ const schema = {
           minLength: 2,
         }
       },
-      required: ['name', 'idCategory', 'status', 'slog', 'text'],
+      required: ['name', 'idCategory', 'status', 'slug', 'text'],
     },
   },
   required: ['body'],
