@@ -1,0 +1,29 @@
+ArticleTable:
+  Type: AWS::DynamoDB::Table
+  Properties:
+    TableName: ArticleTable-${self:provider.stage}
+    BillingMode: PAY_PER_REQUEST
+    AttributeDefinitions:
+      - AttributeName: id
+        AttributeType: S
+      - AttributeName: idCategory
+        AttributeType: S
+      - AttributeName: slog
+        AttributeType: S
+    KeySchema:
+      - AttributeName: id
+        KeyType: HASH
+    GlobalSecondaryIndexes:
+      - IndexName: category
+        KeySchema:
+          - AttributeName: idCategory
+            KeyType: HASH
+        Projection:
+          ProjectionType: ALL
+      - IndexName: slog
+        KeySchema:
+          - AttributeName: slog
+            KeyType: HASH
+        Projection:
+          ProjectionType: ALL
+            

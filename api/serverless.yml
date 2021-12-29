@@ -14,14 +14,17 @@ provider:
   environment:
     CATEGORY_TABLE_NAME: ${self:custom.CategoryTable.name}
     SUB_CATEGORY_TABLE_NAME: ${self:custom.SubCategoryTable.name}
+    ARTICLE_TABLE_NAME: ${self:custom.ArticleTable.name}
   iamRoleStatements:
     - ${file(iam/CategoryTableIAM.yml):CategoryTableIAM}
     - ${file(iam/SubCategoryTableIAM.yml):SubCategoryTableIAM}
+    - ${file(iam/ArticleTableIAM.yml):ArticleTableIAM}
 
 resources:
   Resources:
     CategoryTable: ${file(resources/CategoryTable.yml):CategoryTable}
     SubCategoryTable: ${file(resources/SubCategoryTable.yml):SubCategoryTable}
+    ArticleTable: ${file(resources/ArticleTable.yml):ArticleTable}
   
 functions:
   createCategory:
@@ -101,6 +104,13 @@ functions:
           method: GET
           path: /categoryandsubcategory
           cors: true
+  createArticle:
+    handler: src/routes/article/createArticle.handler
+    events:
+      - http:
+          method: POST
+          path: /article
+          cors: true
           
 custom:
   authorizer: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:auth-service-${self:provider.stage}-auth
@@ -110,5 +120,8 @@ custom:
   SubCategoryTable:
     name: !Ref SubCategoryTable
     arn: !GetAtt SubCategoryTable.Arn
+  ArticleTable:
+    name: !Ref ArticleTable
+    arn: !GetAtt ArticleTable.Arn
   bundle:
     linting: false
