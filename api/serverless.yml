@@ -111,6 +111,13 @@ functions:
           method: POST
           path: /article
           cors: true
+  getArticles:
+    handler: src/routes/article/getArticles.handler
+    events:
+      - http:
+          method: GET
+          path: /articles
+          cors: true
           
 custom:
   authorizer: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:auth-service-${self:provider.stage}-auth
