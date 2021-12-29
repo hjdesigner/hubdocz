@@ -32,9 +32,11 @@ const AddCategoryTemplate = () => {
   } = useCategory();
 
   useEffect(() => {
+    setSuccess(false);
+    setError(false);
     getCategories();
     getCategory();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return ( <>
     <S.Wrapper>

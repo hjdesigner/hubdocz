@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useParams, withRouter } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useCategory } from 'hooks'
 import {
   Categories,
@@ -7,18 +7,18 @@ import {
 import { EditAlt } from '@styled-icons/boxicons-regular/EditAlt'
 import * as S from './styles'
 
-const CategoryTemplate = () => {
+const SubCategoryTemplate = () => {
   let { id } = useParams();
   const {
     getCategories,
     categories,
     getCategory,
-    getCurrentCategory,
-    currentCategory,
+    currentSubCategory,
+    getCurrentSubCategory,
   } = useCategory();
 
   useEffect(() => {
-    getCurrentCategory(id);
+    getCurrentSubCategory(id);
     getCategories();
     getCategory();
   }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -38,8 +38,8 @@ const CategoryTemplate = () => {
       <S.Page>
         <S.HeaderCategory>
           <S.TitleCategoryPage>
-            {currentCategory.name}
-            <S.CategoryEdit to={`/edit-category/${currentCategory.id}`}><EditAlt /></S.CategoryEdit>
+            {currentSubCategory.name}
+            <S.CategoryEdit to={`/edit-subcategory/${currentSubCategory.id}`}><EditAlt /></S.CategoryEdit>
           </S.TitleCategoryPage>
         </S.HeaderCategory>        
       </S.Page>
@@ -47,4 +47,4 @@ const CategoryTemplate = () => {
   </>)
 }
 
-export default withRouter(CategoryTemplate)
+export default SubCategoryTemplate

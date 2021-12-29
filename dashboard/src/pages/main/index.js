@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import styled from 'styled-components'
 import { Nav } from 'components'
-import { HOME, CONTENTS, ADD_CATEGORY, CATEGORY, EDIT_CATEGORY } from 'utils/routes'
+import { HOME, CONTENTS, ADD_CATEGORY, CATEGORY, EDIT_CATEGORY, SUB_CATEGORY, EDIT_SUB_CATEGORY } from 'utils/routes'
 
 const HomeTemplate = React.lazy(
   () => import('pages/home')
@@ -18,6 +18,12 @@ const CategoryTemplate = React.lazy(
 )
 const EditCategoryTemplate = React.lazy(
   () => import('pages/editCategory')
+)
+const SubCategoryTemplate = React.lazy(
+  () => import('pages/subCategory')
+)
+const EditSubCategoryTemplate = React.lazy(
+  () => import('pages/editSubCategory')
 )
 
 const Main = () => (
@@ -52,6 +58,16 @@ const Main = () => (
             path={EDIT_CATEGORY}
             exact
             component={EditCategoryTemplate}
+          />
+          <Route
+            path={SUB_CATEGORY}
+            exact
+            component={SubCategoryTemplate}
+          />
+          <Route
+            path={EDIT_SUB_CATEGORY}
+            exact
+            component={EditSubCategoryTemplate}
           />
         </Switch>
       </WrapperRight>      

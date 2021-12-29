@@ -56,3 +56,19 @@ export const getAllCategoriesAndSub = async () => {
     return false
   }
 }
+export const getSubCategoryId = async (id) => {
+  try {
+    const response = await axios.get(`${process.env.REACT_APP_API}/subcategory/${id}`);
+    return response.data;
+  } catch {
+    return false;
+  }
+}
+export const editSubCategory = async (id, data) => {
+  try {
+    const response = await axios.put(`${process.env.REACT_APP_API}/subcategory/${id}`, data);
+    return response.data;
+  } catch {
+    return false;
+  }
+}

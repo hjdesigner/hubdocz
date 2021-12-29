@@ -59,6 +59,13 @@ functions:
           method: DELETE
           path: /category/{id}
           cors: true
+  getSubCategory:
+    handler: src/routes/subCategory/getSubCategory.handler
+    events:
+      - http:
+          method: GET
+          path: /subcategory/{id}
+          cors: true
   createSubCategory:
     handler: src/routes/subCategory/createSubCategory.handler
     events:

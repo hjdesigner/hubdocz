@@ -16,7 +16,11 @@ const Categories = ({ item }) => {
       </S.CategoryText>            
       <S.SubCategory open={open}>
         {item.subCategory.map((sub) => (        
-          <S.SubCategoryLi key={sub.id}>{sub.name}</S.SubCategoryLi>
+          <S.SubCategoryLi key={sub.id}>
+            <S.CategoryLink to={`/contents/subcategory/${friendlyUrl(sub.id)}`}>
+              <S.CategoryStatus status={sub.status} space={true} /> {sub.name}
+            </S.CategoryLink>
+          </S.SubCategoryLi>
         ))}      
       </S.SubCategory>
     </S.Category>

@@ -11,28 +11,32 @@ import {
 } from 'components'
 import * as S from './styles'
 
-const EditCategoryTemplate = () => {
+const EditSubCategoryTemplate = () => {
   let { id } = useParams();
   const {
     getCategories,
     categories,
     nameCategory,
     setNameCategory,
-    handlerEdit,
     getCategory,
+    category,
+    isSub,
     statusCategory,
     setStatusCategory,
+    setIdSub,
     success,
     setSuccess,
     error,
     setError,
-    editCurrentCategory,
+    editCurrentSubCategory,
+    idSub,
+    handlerEditSub,
   } = useCategory();
 
   useEffect(() => {
     setSuccess(false);
     setError(false);
-    editCurrentCategory(id);
+    editCurrentSubCategory(id);
     getCategories();
     getCategory();
   }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -57,7 +61,7 @@ const EditCategoryTemplate = () => {
           {error && (<S.AlertWrapper>
             <AlertError handleClose={() => setError(false)} text='There was an error when editing the category, try again.' />
           </S.AlertWrapper>)}
-          <S.TitleCategory>Edit the category</S.TitleCategory>
+          <S.TitleCategory>Edit your category</S.TitleCategory>
           <Input name='addCategory' label='Enter the category name' placeholder='Category name' value={nameCategory} handleChange={(e) => setNameCategory(e.target.value)} />
           <S.SpaceMedium />
           <Select name='StatusCategory' label='Show category' value={statusCategory} handleChange={(e) => setStatusCategory(e.target.value)}>
@@ -65,10 +69,17 @@ const EditCategoryTemplate = () => {
             <option value="false">disabled</option>
           </Select>
           <S.SpaceMedium />
+          <S.IsSub>
+            <S.IsSubText>Is a subcategory? Yes</S.IsSubText>            
+          </S.IsSub>
+          <S.SpaceMedium />
+          {isSub && <Select name='category' label='Choose the category' value={idSub} handleChange={(e) => setIdSub(e.target.value)}>
+            {category.map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}
+          </Select>}
           <S.AcitionsAddCategory>
             <ButtonCreate
               disabled={nameCategory === ''}
-              handleClick={() => handlerEdit(id)}
+              handleClick={() => handlerEditSub(id)}
               >
                 Edit
             </ButtonCreate>
@@ -79,4 +90,4 @@ const EditCategoryTemplate = () => {
   </>)
 }
 
-export default EditCategoryTemplate
+export default EditSubCategoryTemplate

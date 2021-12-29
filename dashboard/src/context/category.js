@@ -3,10 +3,12 @@ import {
   getAllCategories,
   createCategory,
   createSubCategory,
-  deleteCategory,
+  // deleteCategory,
   editCategory,
   getAllCategoriesAndSub,
   getCategoryId,
+  getSubCategoryId,
+  editSubCategory,
 } from 'utils/request'
 
 const CategoryContext = createContext();
@@ -21,6 +23,7 @@ function CategoryProvider({ children }) {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [currentCategory, setCurrentCategory] = useState({});
+  const [currentSubCategory, setCurrentSubCategory] = useState({});
   
   const getCategories = async () => {
     const result = await getAllCategoriesAndSub();
@@ -83,15 +86,42 @@ function CategoryProvider({ children }) {
 
     setError(true);
   }
+  const handlerEditSub = async (id) => {
+    let data = {
+      idCategory: idSub,
+      name: nameCategory,
+      status: statusCategory === 'true' ? true : false,
+    }
+    const result = await editSubCategory(id, data);
 
+    if (result) {
+      getCategories();
+      setSuccess(true);
+      return;
+    }
+
+    setError(true);
+  }
   const getCurrentCategory = async (id) => {
     const result = await getCategoryId(id);
     setCurrentCategory(result);
+  }
+  const getCurrentSubCategory = async (id) => {
+    const result = await getSubCategoryId(id);
+    setCurrentSubCategory(result);
   }
   const editCurrentCategory = async (id) => {
     const result = await getCategoryId(id);
     setNameCategory(result.name);
     setStatusCategory(result.status ? "true" : "false");
+  }
+  const editCurrentSubCategory = async (id) => {
+    const result = await getSubCategoryId(id);
+    setCurrentSubCategory(result);
+    setNameCategory(result.name);
+    setStatusCategory(result.status ? "true" : "false");
+    setIdSub(result.idCategory);
+    setIsSub(true);
   }
   
   // const handlerDelete = async (id) => {
@@ -139,6 +169,10 @@ function CategoryProvider({ children }) {
       currentCategory,
       editCurrentCategory,
       handlerEdit,
+      currentSubCategory,
+      getCurrentSubCategory,
+      editCurrentSubCategory,
+      handlerEditSub,
     }}>
       {children}
     </CategoryContext.Provider>

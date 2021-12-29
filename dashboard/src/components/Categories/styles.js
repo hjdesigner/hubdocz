@@ -55,10 +55,8 @@ export const CategoryLink = styled(Link)`
   width: auto;
   display: flex;
   align-items: center;
-  padding: ${props => props.theme.spaces.small} 0;
   font-size: 1.3rem;
   color: ${props => props.theme.colors.grayMedium};
-  justify-content: space-between;
   flex-wrap: wrap;
   cursor: pointer;
 `;

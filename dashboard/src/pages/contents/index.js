@@ -14,7 +14,7 @@ const ContentsTemplate = () => {
 
   useEffect(() => {
     getCategories();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   
   return (
     <S.Wrapper>
