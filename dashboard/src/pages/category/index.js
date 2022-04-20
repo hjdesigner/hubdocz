@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import { useParams, withRouter } from 'react-router-dom';
-import { useCategory } from 'hooks'
+import { useCategory, useArticle } from 'hooks'
 import {
   Categories,
+  Articles,
 } from 'components'
 import { EditAlt } from '@styled-icons/boxicons-regular/EditAlt'
 import * as S from './styles'
@@ -16,11 +17,16 @@ const CategoryTemplate = () => {
     getCurrentCategory,
     currentCategory,
   } = useCategory();
+  const {
+    articles,
+    allArticles,
+  } = useArticle();
 
   useEffect(() => {
     getCurrentCategory(id);
     getCategories();
     getCategory();
+    allArticles(id);
   }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return ( <>
@@ -38,10 +44,17 @@ const CategoryTemplate = () => {
       <S.Page>
         <S.HeaderCategory>
           <S.TitleCategoryPage>
-            {currentCategory.name}
+            Category: {currentCategory.name}
             <S.CategoryEdit to={`/edit-category/${currentCategory.id}`}><EditAlt /></S.CategoryEdit>
           </S.TitleCategoryPage>
-        </S.HeaderCategory>        
+        </S.HeaderCategory>
+        <S.HeaderArticle>
+          <S.TitleArticlePage>All Articles</S.TitleArticlePage>
+          <S.LinkNewArticle to="/add-article">New Article</S.LinkNewArticle>
+        </S.HeaderArticle>
+        <S.AllArticles>
+          {articles.map((item) => <Articles item={item} key={item.id} />)}
+        </S.AllArticles>
       </S.Page>
     </S.Wrapper>
   </>)

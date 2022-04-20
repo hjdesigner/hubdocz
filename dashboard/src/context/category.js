@@ -24,10 +24,37 @@ function CategoryProvider({ children }) {
   const [error, setError] = useState(false);
   const [currentCategory, setCurrentCategory] = useState({});
   const [currentSubCategory, setCurrentSubCategory] = useState({});
+  const [categoriesArticle, setCategoriesArticle] = useState([]);
+
+  const articleCategories = (result) => {
+    let categories = [];
+    result.forEach((item) => {
+      if (item.subCategory.length) {
+        categories.push({
+          id: item.id,
+          name: item.name,
+          status: item.status
+        });
+        item.subCategory.forEach((sub) => {
+          categories.push(sub)
+        });
+      } else {
+        categories.push({
+          id: item.id,
+          name: item.name,
+          status: item.status
+        });
+      }        
+    });
+    setCategoriesArticle(categories);
+  }
   
-  const getCategories = async () => {
+  const getCategories = async (isArticle = false) => {
     const result = await getAllCategoriesAndSub();
     setCategories(result)
+    if (isArticle) {
+      articleCategories(result)
+    }
   }
   const getCategory = async () =>  {
     const result = await getAllCategories();
@@ -173,6 +200,7 @@ function CategoryProvider({ children }) {
       getCurrentSubCategory,
       editCurrentSubCategory,
       handlerEditSub,
+      categoriesArticle,
     }}>
       {children}
     </CategoryContext.Provider>

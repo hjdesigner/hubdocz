@@ -132,6 +132,13 @@ functions:
           method: GET
           path: /slugarticle
           cors: true
+  updateArticle:
+    handler: src/routes/article/updateArticle.handler
+    events:
+      - http:
+          method: PUT
+          path: /article/{id}
+          cors: true
           
 custom:
   authorizer: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:auth-service-${self:provider.stage}-auth

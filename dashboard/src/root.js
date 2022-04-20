@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
-import { CategoryProvider } from 'context';
+import { CategoryProvider, ArticleProvider } from 'context';
 import theme from 'utils/theme';
 import App from './App'
 
@@ -10,10 +10,12 @@ function Root () {
   return (
     <ThemeProvider theme={theme}>
       <CategoryProvider>
-        <BrowserRouter>
-          <GlobalStyle />
-          <Route component={App} />
-        </BrowserRouter>
+        <ArticleProvider>
+          <BrowserRouter>
+            <GlobalStyle />
+            <Route component={App} />
+          </BrowserRouter>
+        </ArticleProvider>
       </CategoryProvider>
     </ThemeProvider>
     

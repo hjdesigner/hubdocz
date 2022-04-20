@@ -20,4 +20,8 @@ export const InputElement = styled.input`
   background-color: transparent;
   font-size: 1.4rem;
   color: ${props => props.theme.colors.black};
+
+  &:focus {
+    background-color: ${props => props.theme.colors.white};
+  }
 `;

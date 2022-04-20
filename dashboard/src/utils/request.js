@@ -72,3 +72,35 @@ export const editSubCategory = async (id, data) => {
     return false;
   }
 }
+export const createArticle = async (data) => {
+  try {
+    const response = await axios.post(`${process.env.REACT_APP_API}/article`, data);
+    return response.data;
+  } catch {
+    return false;
+  }
+}
+export const getAllArticles = async (id) => {
+  try {
+    const response = await axios.get(`${process.env.REACT_APP_API}/articles?idCategory=${id}`);
+    return response.data;
+  } catch {
+    return false;
+  }
+}
+export const getArticleId = async (id) => {
+  try {
+    const response = await axios.get(`${process.env.REACT_APP_API}/article/${id}`);
+    return response.data;
+  } catch {
+    return false;
+  }
+}
+export const editArticle = async (id, data) => {
+  try {
+    const response = await axios.put(`${process.env.REACT_APP_API}/subcategory/${id}`, data);
+    return response.data;
+  } catch {
+    return false;
+  }
+}

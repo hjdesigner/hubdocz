@@ -37,9 +37,8 @@ export const LinkAddCategory = styled(Link)`
   }
 `;
 export const Page = styled.div`
-  width: 75%;
-  padding-left: 5%;
-  display: flex;
+  width: 78%;
+  padding-left: 2%;
 `;
 export const HeaderCategory = styled.section`
   width: 100%;
@@ -58,3 +57,36 @@ export const CategoryEdit = styled(Link)`
   margin-left: ${props => props.theme.spaces.small};
   cursor: pointer;
 `;
+export const HeaderArticle = styled(HeaderCategory)`
+  border: 1px solid ${props => props.theme.colors.gray};
+  border-left: 0;
+  border-right: 0;
+  padding: ${props => props.theme.spaces.medium} ${props => props.theme.spaces.small};
+  justify-content: space-between;
+  display: flex;
+`;
+export const TitleArticlePage = styled.h4`
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: ${props => props.theme.colors.black};
+  display: flex;
+  align-items: center;
+`;
+export const LinkNewArticle = styled(Link)`
+  background-color: ${props => props.theme.colors.blue};
+  padding: ${props => props.theme.spaces.small} ${props => props.theme.spaces.medium};
+  cursor: pointer;
+  border: 2px solid ${props => props.theme.colors.blue};
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: ${props => props.theme.colors.white};
+  transition: all .25s ease-in-out;
+  text-decoration: none;
+
+  &:hover {
+    border: 2px solid ${props => props.theme.colors.black};
+    background-color: transparent;
+    color: ${props => props.theme.colors.black};
+  }
+`;
+export const AllArticles = styled.ul``;

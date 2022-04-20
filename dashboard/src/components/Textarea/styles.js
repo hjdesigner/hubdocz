@@ -13,15 +13,6 @@ export const Label = styled.label`
   font-size: 1.4rem;
   color: ${props => props.theme.colors.black};
 `;
-export const SelectElement = styled.select`
-  width: 100%;
-  padding: ${props => props.theme.spaces.small};
-  border: 1px solid ${props => props.theme.colors.gray2};
-  background-color: transparent;
-  font-size: 1.4rem;
-  color: ${props => props.theme.colors.black};
-
-  &:focus {
-    background-color: ${props => props.theme.colors.white};
-  }
+export const TextArea = styled.div`
+  background-color: ${props => props.theme.colors.white};
 `;
